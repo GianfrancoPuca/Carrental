@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Registrazione Utente </title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+<a th:href="@{/}"> Torna in Home Page</a>
+<form th:object="${utente}" method="post">
+    <input type="text" th:field="*{nome}" placeholder="Inserisci il tuo nome" required>
+    <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></p>
+    <br>
+    <input type="text" th:field="*{cognome}"placeholder="Inserisci il tuo cognome" required>
+    <p th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></p>
+    <br>
+    <input type="text" th:field="*{numeroTelefono}"placeholder="Inserisci il tuo numero di telefono" required>
+    <p th:if="${#fields.hasErrors('numeroTelefono')}" th:errors="*{numeroTelefono}"></p>
+    <br>
+    <input type="text" th:field="*{profilo.username}" placeholder="Scegli il tuo username" required>
+    <p th:if="${#fields.hasErrors('profilo.username')}" th:errors="*{profilo.username}"></p>
+    <p th:if="${duplicato}" th:text="${duplicato}"></p>
+    <br>
+    <input type="password" th:field="*{profilo.password}"placeholder="Scegli la tua password" required>
+    <p th:if="${#fields.hasErrors('profilo.password')}" th:errors="*{profilo.password}"></p>
+    <br>
+    <input type="submit" value="Registrati">
+</form>
+</body>
+</html>

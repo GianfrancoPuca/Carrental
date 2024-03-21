@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Riservata Utente </title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+<a th:href="@{/}"> Torna in Home Page</a>
+<a th:href="@{/riservatautente/logout}"> Logout </a>
+<H1 th:text="${utente.nome} + ' ' + ${utente.cognome} + ' ' + 'questa è la tua area riservata' "> </H1>
+<button id="toggleButton" onclick="toggleTable()"> Mostra/Nascondi Modifica Dati Profilo </button>
+<form id="hidden" th:object="${utente}" th:action="@{/riservatautente/modifica}" method="post">
+    <input type="hidden" th:field="*{id}" th:value="${idUtente}" />
+    <input type="text" th:field="*{nome}" placeholder="Inserisci il tuo nome" required>
+    <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></p>
+    <br>
+    <input type="text" th:field="*{cognome}"placeholder="Inserisci il tuo cognome" required>
+    <p th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></p>
+    <br>
+    <input type="text" th:field="*{numeroTelefono}"placeholder="Inserisci il tuo numero di telefono" required>
+    <p th:if="${#fields.hasErrors('numeroTelefono')}" th:errors="*{numeroTelefono}"></p>
+    <br>
+    <input type="text" th:field="*{profilo.username}" placeholder="Scegli il tuo username" required>
+    <p th:if="${#fields.hasErrors('profilo.username')}" th:errors="*{profilo.username}"></p>
+    <p th:if="${duplicato}" th:text="${duplicato}"></p>
+    <br>
+    <input type="password" th:field="*{profilo.password}"placeholder="Scegli la tua password" required>
+    <p th:if="${#fields.hasErrors('profilo.password')}" th:errors="*{profilo.password}"></p>
+    <br>
+    <input type="submit" value="Modifica">
+</form>
+<div th:if="${modificaSuccesso}" class="success-message">
+    Hai effettuato le tue modifiche con successo.
+</div>
+<H4 th:if="${noleggio == null}"> Non hai noleggiato nessuna auto </H4>
+
+<table>
+    <tr th:each="noleggio : ${noleggio}">
+        <td th:text="${noleggio.auto.marca}"></td>
+        <td th:text="${noleggio.auto.modello}"></td>
+        <td> <a th:href="@{/riservatautente/elimina(id=${noleggio.id})}"> Rimuovi noleggio </a></td>
+    </tr>
+</table>
+</body>
+<script>
+    function toggleTable() {
+        let table = document.getElementById("hidden");
+        if (table.style.display === "none") {
+            table.style.display = "table";
+        } else {
+            table.style.display = "none";
+        }
+    }
+
+</script>
+</html>

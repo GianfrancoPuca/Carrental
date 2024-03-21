@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Admin </title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+<a th:href="@{/}"> Torna in Home Page</a>
+<a th:href="@{/riservataadmin/logout}"> Logout </a>
+<p th:if="${errore}" style="color:red"> Credenziali Errate </p>
+<form action="/loginadmin" method="post">
+    <input type="text" name="username" placeholder="username" required>
+    <br>
+    <input type="password" name="password" placeholder="password" required>
+    <br>
+    <input type="submit" value="Accedi">
+</form>
+</body>
+</html>

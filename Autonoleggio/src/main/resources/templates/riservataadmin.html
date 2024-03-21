@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Riservata Admin</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+<form action="/riservataadmin/logout">
+    <input type="submit" value="Logout">
+    </form>
+<button id="toggleButton" onclick="toggleTable()"> Mostra/Nascondi Tabella Auto </button>
+<table id="hidden">
+    <tr>
+        <td> Marca </td>
+        <td> Modello  </td>
+        <td> Numero Posti  </td>
+        <td></td>
+    </tr>
+    <tr th:each="auto : ${automobili}">
+        <td th:text="${auto.marca}"></td>
+        <td th:text="${auto.modello}"></td>
+        <td th:text="${auto.numeroPosti}"></td>
+        <td> <a th:href="@{/riservataadmin/elimina(id=${auto.id})}"> Rimuovi auto </a></td>
+        <td> <a th:href="@{/riservataadmin(id=${auto.id})}"> Modifica auto </a></td>
+    </tr>
+</table>
+<button id="toggleButton1" onclick="toggleTable1()"> Mostra/Nascondi Tabella Utenti </button>
+<table id="hidden1">
+    <tr>
+        <td> Nome </td>
+        <td> Cognome  </td>
+        <td> Numero di Telefono </td>
+        <td> Username </td>
+        <td></td>
+    </tr>
+    <tr th:each=" u : ${utenti}">
+        <td th:text="${u.nome}"></td>
+        <td th:text="${u.cognome}"></td>
+        <td th:text="${u.numeroTelefono}"></td>
+        <td th:text="${u.profilo.username}"></td>
+    </tr>
+</table>
+<button id="toggleButton2" onclick="toggleTable2()"> Mostra/Nascondi Tabella Noleggi </button>
+<table id="hidden2">
+    <tr>
+        <td> Data Inizio Noleggio </td>
+        <td> Data Fine Noleggio  </td>
+        <td> Username </td>
+        <td> Marca </td>
+        <td> Modello </td>
+        <td></td>
+    </tr>
+    <tr th:each=" n : ${noleggi}">
+        <td th:text="${n.dataInizioNoleggio}"></td>
+        <td th:text="${n.dataFineNoleggio}"></td>
+        <td th:text="${n.profilo.utente.nome}"></td>
+        <td th:text="${n.profilo.utente.cognome}"></td>
+        <td th:text="${n.auto.marca}"></td>
+        <td th:text="${n.auto.modello}"></td>
+    </tr>
+</table>
+<form method="post" action="/riservataadmin" enctype="multipart/form-data">
+    <input type="text" name="targa" th:value="${targa}"placeholder="Inserisci la targa" required>
+    <br>
+    <input type="text" name="marca" th:value="${marca}" placeholder="Inserisci la marca" required>
+    <br>
+    <input type="text" name="modello" th:value="${modello}" placeholder="Inserisci il modello" required>
+    <br>
+    <input type="number" name="numeroPosti" th:value="${numeroPosti}" placeholder="Scrivi il numero posti" required>
+    <br>
+    <input type="text" name="tipoCambio" th:value="${tipoCambio}" placeholder="Inserisci il tipo di cambio" required>
+    <br>
+    <input type="number" name="tariffaGiornaliera" th:value="${tariffaGiornaliera}" placeholder="Inserisci la tariffa giornaliera" required>
+    <br>
+    <input type="text" name="alimentazione" th:value="${alimentazione}" placeholder="Inserisci il tipo di alimentazione" required>
+    <br>
+    <input type="number" name="numeroPorte" th:value="${numeroPorte}" placeholder="Inserisci il numero di porte" required>
+    <br>
+    <input type="text" name="coperturaDanni" th:value="${coperturaDanni}" placeholder="Inserisci se ha la copertura danni" required>
+    <br>
+    <input type="text" name="coperturaFurti" th:value="${coperturaFurti}" placeholder="Inserisci se ha la copertura furto" required>
+    <br>
+    <input type="text" name="noleggioLungoTermine" th:value="${noleggioLungoTermine}" placeholder="Inserisci se può essere noleggiata a lungo termine" required>
+    <br>
+    <input type="text" name="descrizione" th:value="${descrizione}" placeholder="Inserisci la descrizione dell'auto">
+    <br>
+    <input type="file" name="foto">
+    <br>
+    <input type="submit" value="Crea nuova auto">
+</form>
+</body>
+<script>
+    function toggleTable() {
+        let table = document.getElementById("hidden");
+        if (table.style.display === "none") {
+            table.style.display = "table";
+        } else {
+            table.style.display = "none";
+        }
+    }
+
+    function toggleTable1() {
+        let table1 = document.getElementById("hidden1");
+        if (table1.style.display === "none") {
+            table1.style.display = "table";
+        } else {
+            table1.style.display = "none";
+        }
+    }
+
+    function toggleTable2() {
+        let table2 = document.getElementById("hidden2");
+        if (table2.style.display === "none") {
+            table2.style.display = "table";
+        } else {
+            table2.style.display = "none";
+        }
+    }
+
+
+</script>
+</html>

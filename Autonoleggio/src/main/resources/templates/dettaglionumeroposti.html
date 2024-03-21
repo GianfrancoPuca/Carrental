@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Lista Auto Numero Posti </title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+<a th:href="@{/}" class="button-link">Torna in Home Page</a>
+<table>
+    <tr>
+        <td> Targa </td>
+        <td> Marca </td>
+        <td> Modello  </td>
+        <td> Numero Posti  </td>
+        <td> Tipo Cambio </td>
+        <td> Tariffa Giornaliera </td>
+        <td> Alimentazione </td>
+        <td> Numero Porte </td>
+        <td> Copertura danni </td>
+        <td> Copertura furti </td>
+        <td> Noleggio a lungo termine </td>
+        <td> Descrizione </td>
+        <td></td>
+    </tr>
+    <tr th:each="auto : ${automobili}">
+        <td th:text="${auto.targa}"> </td>
+        <td th:text="${auto.marca}"> </td>
+        <td th:text="${auto.modello}">  </td>
+        <td th:text="${auto.numeroPosti}">  </td>
+        <td th:text="${auto.tipoCambio}"> </td>
+        <td th:text="${auto.tariffaGiornaliera}">  </td>
+        <td th:text="${auto.alimentazione}"> </td>
+        <td th:text="${auto.numeroPorte}"> </td>
+        <td th:text="${auto.coperturaDanni}"> </td>
+        <td th:text="${auto.coperturaFurti}"> </td>
+        <td th:text="${auto.noleggioLungoTermine}"> </td>
+        <td th:text="${auto.descrizione}"> </td>
+        <td>
+            <img th:src="@{${auto.foto}}"
+                 style="max-height:100px;" alt="Foto auto">
+        </td>
+    </tr>
+</table>
+</body>
+</html>
